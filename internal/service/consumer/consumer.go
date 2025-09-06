@@ -41,7 +41,7 @@ func (s *service) run(ctx context.Context) <-chan error {
 	go func() {
 		defer close(errChan)
 
-		errChan <- s.consumer.Consume(ctx, "notify", s.NoteSaveHandler)
+		errChan <- s.consumer.Consume(ctx, s.NoteSaveHandler)
 	}()
 
 	return errChan
