@@ -11,4 +11,5 @@ type Consumer interface {
 	Consume(ctx context.Context, handler consumer.Handler) error
 	Close() error
 }
+
 type Message = kafka.Message

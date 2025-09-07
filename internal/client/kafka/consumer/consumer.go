@@ -3,6 +3,7 @@ package consumer
 import (
 	"context"
 	"log"
+	"os"
 	"time"
 
 	"github.com/segmentio/kafka-go"
@@ -24,7 +25,11 @@ func New(brokers []string, groupID, topic string) *Consumer {
 		MaxBytes:        10e6,
 		MaxWait:         500 * time.Millisecond,
 		ReadLagInterval: 5 * time.Second,
+
+		Logger:      log.New(os.Stdout, "[kafka] ", 0),
+		ErrorLogger: log.New(os.Stderr, "[kafka-err] ", 0),
 	})
+
 	return &Consumer{r: r}
 }
 

@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 	"os/signal"
@@ -19,8 +20,11 @@ type App struct {
 func NewApp(ctx context.Context) (*App, error) {
 	a := &App{}
 
-	err := a.initdeps(ctx)
-	if err != nil {
+	if err := a.initdeps(ctx); err != nil {
+		return nil, err
+	}
+
+	if err := a.initServiceProvider(ctx); err != nil {
 		return nil, err
 	}
 
@@ -28,7 +32,7 @@ func NewApp(ctx context.Context) (*App, error) {
 }
 
 func (a *App) initdeps(_ context.Context) error {
-	err := config.Load("..notifier.env")
+	err := config.Load(".env")
 	if err != nil {
 		return err
 	}
@@ -37,7 +41,7 @@ func (a *App) initdeps(_ context.Context) error {
 }
 
 func (a *App) initServiceProvider(_ context.Context) error {
-	a.serviceProvider = &serviceProvider{}
+	a.serviceProvider = newServiceProvider()
 
 	return nil
 }
@@ -66,6 +70,10 @@ func (a *App) Run(ctx context.Context) error {
 	defer func() {
 		closer.CloseAll()
 	}()
+
+	if a.serviceProvider == nil {
+		return fmt.Errorf("service provider is nil")
+	}
 
 	ctx, cancel := context.WithCancel(ctx)
 

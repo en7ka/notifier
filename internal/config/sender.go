@@ -9,7 +9,7 @@ import (
 
 const (
 	tokenEnvName = "BOT_TOKEN"
-	idEnvName    = "ID"
+	idEnvName    = "CHAT_ID"
 )
 
 type Sender interface {

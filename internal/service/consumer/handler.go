@@ -13,6 +13,9 @@ import (
 func (s *service) NoteSaveHandler(_ context.Context, msg kafka.Message) error {
 	var user model.User
 
+	log.Printf("[msg] topic=%s part=%d off=%d key=%s val=%s",
+		msg.Topic, msg.Partition, msg.Offset, string(msg.Key), string(msg.Value))
+
 	if err := json.Unmarshal(msg.Value, &user); err != nil {
 		return fmt.Errorf("ошибка декодирования: %w", err)
 	}

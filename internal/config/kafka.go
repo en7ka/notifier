@@ -9,7 +9,7 @@ import (
 const (
 	brokersEnvName = "KAFKA_BROKERS"
 	groupEnvName   = "KAFKA_GROUP"
-	topicEnvName   = "KAFKA_TOPIC"
+	topicEnvName   = "THEME"
 )
 
 type KafkaConsumerConfig interface {
