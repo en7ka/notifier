@@ -10,7 +10,6 @@ import (
 	"syscall"
 
 	"github.com/en7ka/notifier/internal/closer"
-	"github.com/en7ka/notifier/internal/config"
 )
 
 type App struct {
@@ -32,11 +31,11 @@ func NewApp(ctx context.Context) (*App, error) {
 }
 
 func (a *App) initdeps(_ context.Context) error {
-	err := config.Load(".env")
-	if err != nil {
-		return err
-	}
-
+	//err := config.Load(".env")
+	//if err != nil {
+	//	return err
+	//}
+	//
 	return nil
 }
 
