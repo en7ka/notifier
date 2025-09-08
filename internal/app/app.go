@@ -19,9 +19,9 @@ type App struct {
 func NewApp(ctx context.Context) (*App, error) {
 	a := &App{}
 
-	if err := a.initdeps(ctx); err != nil {
-		return nil, err
-	}
+	//if err := a.initdeps(ctx); err != nil {
+	//	return nil, err
+	//}
 
 	if err := a.initServiceProvider(ctx); err != nil {
 		return nil, err
@@ -30,14 +30,14 @@ func NewApp(ctx context.Context) (*App, error) {
 	return a, nil
 }
 
-func (a *App) initdeps(_ context.Context) error {
-	//err := config.Load(".env")
-	//if err != nil {
-	//	return err
-	//}
-	//
-	return nil
-}
+//func (a *App) initdeps(_ context.Context) error {
+//	//err := config.Load(".env")
+//	//if err != nil {
+//	//	return err
+//	//}
+//	//
+//	return nil
+//}
 
 func (a *App) initServiceProvider(_ context.Context) error {
 	a.serviceProvider = newServiceProvider()
